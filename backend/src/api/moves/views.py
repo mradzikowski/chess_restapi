@@ -1,6 +1,6 @@
 from flask_restx import Namespace, Resource
 
-figure_namespace = Namespace("figure")
+moves_namespace = Namespace("figure")
 
 
 class Move(Resource):
@@ -11,5 +11,5 @@ class MovesList(Resource):
     pass
 
 
-figure_namespace.add_resource(Move)
-figure_namespace.add_resource(MovesList)
+moves_namespace.add_resource(Move)
+moves_namespace.add_resource(MovesList)

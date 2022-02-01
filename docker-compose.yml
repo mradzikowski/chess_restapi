@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  api_chess:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - "./backend:/usr/src/app"
+    ports:
+      - 8000:5000
+    environment:
+      - FLASK_ENV=development
+      - APP_SETTINGS=src.config.DevelopmentConfig

@@ -1,7 +1,10 @@
-from typing import List, Tuple
+from typing import List, Tuple, Union
 
 
-def list_available_moves_pawn(field: str, directions: List[Tuple]) -> None | List[str]:
+def list_available_moves_pawn(
+    field: str,
+    directions: List[Tuple],
+) -> Union[None, List[str]]:
     """
     Helper method to collect all available moves for pawn. If pawn is located on 2nd row
     on the board from the bottom, there is additional move by two squares
@@ -12,6 +15,12 @@ def list_available_moves_pawn(field: str, directions: List[Tuple]) -> None | Lis
     """
     available_moves = []
     curr_row, curr_col = string_field_to_indexes(field=field)
+
+    # There are no available moves when then pawn
+    # is on the first row from the bottom of the chess board
+    if curr_row == 7:
+        return available_moves
+
     for direction in directions:
         pos_row = curr_row + direction[0]
         pos_col = curr_col + direction[1]
@@ -48,7 +57,7 @@ def check_if_valid_move_pawn(
 def list_available_moves_single_square(
     field: str,
     directions: List[Tuple],
-) -> None | List[str]:
+) -> Union[None, List[str]]:
     """
     Helper method to collect all available moves for knight and king
 
@@ -93,7 +102,7 @@ def check_if_valid_single_point_move(
 def list_available_moves_multiple_squares(
     field: str,
     directions: List[Tuple],
-) -> None | List[str]:
+) -> Union[None, List[str]]:
     """
     Helper method to collect all available moves for bishop, rook and queen
 

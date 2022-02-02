@@ -55,6 +55,12 @@ docker-compose exec api_chess flake8 --max-line-length=88
 docker-compose exec api_chess black .
 ```
 
+#### To check with type checker mypy
+Run
+```shell
+mypy .
+```
+
 #### To test using pytest run
 All tests are in the backend/src/tests folder
 

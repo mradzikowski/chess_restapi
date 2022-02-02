@@ -1,0 +1,15 @@
+import pytest
+from src import create_app
+
+
+@pytest.fixture(scope="module")
+def test_app():
+    """
+    Pytest fixture to yield flask test app in flask context
+
+    :return:
+    """
+    app = create_app()
+    app.config.from_object("src.config.TestingConfig")
+    with app.app_context():
+        yield app

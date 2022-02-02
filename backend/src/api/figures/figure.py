@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List
 
-from src.api.fugures.figure import (
+from src.api.figures.utils import (
     check_if_valid_field,
     check_if_valid_move_pawn,
     check_if_valid_multiple_squares,

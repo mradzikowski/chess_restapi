@@ -109,6 +109,28 @@ def list_available_moves_multiple_squares(
     return available_moves
 
 
+def check_if_valid_multiple_squares(
+    curr_field: str,
+    dest_field: str,
+    directions: List[Tuple],
+) -> bool:
+    """
+    Helper method to check if the desired move is valid for bishop, queen and rook
+
+    :param curr_field: current position of figure
+    :param dest_field: desired destination of figure
+    :param directions: possible directions for the figure
+    :return: True if is valid, False if not valid
+    """
+    available_moves = list_available_moves_multiple_squares(
+        field=curr_field,
+        directions=directions,
+    )
+    if dest_field in available_moves:
+        return True
+    return False
+
+
 def check_if_figure_in_board(x: int, y: int) -> bool:
     """
     Helper method to check if the current position of figure is in board
@@ -163,7 +185,7 @@ def indexes_to_field(x_index: int, y_index: int) -> str:
         6: "g",
         7: "h",
     }
-    return numbers_to_letters[y_index] + str(x_index + 8)
+    return numbers_to_letters[y_index] + str(8 - x_index)
 
 
 def check_if_valid_field(field: str) -> bool:

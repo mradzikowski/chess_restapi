@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Union
 
 from src.api.figures.utils import (
     check_if_valid_field,
@@ -48,7 +48,7 @@ class King(Figure):
             (-1, 1),
         ]
 
-    def list_available_moves(self) -> None | List[str]:
+    def list_available_moves(self) -> Union[None, List[str]]:
         """
         Class method to retrieve available moves for the king
 
@@ -81,7 +81,7 @@ class Rook(Figure):
         self.field = field
         self.directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
-    def list_available_moves(self) -> None | List[str]:
+    def list_available_moves(self) -> Union[None, List[str]]:
         """
         Class method to retrieve available moves for the rook
 
@@ -114,7 +114,7 @@ class Bishop(Figure):
         self.field = field
         self.directions = [(1, 1), (1, -1), (-1, -1), (-1, 1)]
 
-    def list_available_moves(self) -> None | List[str]:
+    def list_available_moves(self) -> Union[None, List[str]]:
         """
         Class method to retrieve available moves for the bishop
 
@@ -156,7 +156,7 @@ class Queen(Figure):
             (-1, 1),
         ]
 
-    def list_available_moves(self) -> None | List[str]:
+    def list_available_moves(self) -> Union[None, List[str]]:
         """
         Class method to retrieve available moves for the queen
 
@@ -198,7 +198,7 @@ class Knight(Figure):
             (-1, 2),
         ]
 
-    def list_available_moves(self) -> None | List[str]:
+    def list_available_moves(self) -> Union[None, List[str]]:
         """
         Class method to retrieve available moves for the knight
 
@@ -231,7 +231,7 @@ class Pawn(Figure):
         self.field = field
         self.directions = [(-1, 0)]
 
-    def list_available_moves(self) -> None | List[str]:
+    def list_available_moves(self) -> Union[None, List[str]]:
         """
         Class method to retrieve available moves for the pawn
 

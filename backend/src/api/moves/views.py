@@ -87,7 +87,9 @@ class ValidChessMovesList(Resource):
             return response_object, 409
 
         available_moves = figure.list_available_moves()
-        response_object["availableMoves"] = available_moves
+        if available_moves:
+            response_object["availableMoves"] = available_moves
+
         return response_object, 200
 
 

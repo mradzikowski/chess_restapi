@@ -3,7 +3,7 @@ from typing import List, Tuple, Union
 
 def list_available_moves_pawn(
     field: str,
-    directions: List[Tuple],
+    directions: List[Tuple[int, int]],
 ) -> Union[None, List[str]]:
     """
     Helper method to collect all available moves for pawn. If pawn is located on 2nd row
@@ -13,7 +13,7 @@ def list_available_moves_pawn(
     :param directions: possible directions for the figure
     :return: list of available moves for the current position
     """
-    available_moves = []
+    available_moves: List = []
     curr_row, curr_col = string_field_to_indexes(field=field)
 
     # There are no available moves when then pawn
@@ -38,7 +38,7 @@ def list_available_moves_pawn(
 def check_if_valid_move_pawn(
     curr_field: str,
     dest_field: str,
-    directions: List[Tuple],
+    directions: List[Tuple[int, int]],
 ) -> bool:
     """
     Helper method to check if the desired move is valid for pawn
@@ -49,14 +49,14 @@ def check_if_valid_move_pawn(
     :return: True if is valid, False if not valid
     """
     available_moves = list_available_moves_pawn(field=curr_field, directions=directions)
-    if dest_field in available_moves:
+    if available_moves and dest_field in available_moves:
         return True
     return False
 
 
 def list_available_moves_single_square(
     field: str,
-    directions: List[Tuple],
+    directions: List[Tuple[int, int]],
 ) -> Union[None, List[str]]:
     """
     Helper method to collect all available moves for knight and king
@@ -80,7 +80,7 @@ def list_available_moves_single_square(
 def check_if_valid_single_point_move(
     curr_field: str,
     dest_field: str,
-    directions: List[Tuple],
+    directions: List[Tuple[int, int]],
 ) -> bool:
     """
     Helper method to check if the desired move is valid for knight and kind
@@ -94,14 +94,14 @@ def check_if_valid_single_point_move(
         field=curr_field,
         directions=directions,
     )
-    if dest_field in available_moves:
+    if available_moves and dest_field in available_moves:
         return True
     return False
 
 
 def list_available_moves_multiple_squares(
     field: str,
-    directions: List[Tuple],
+    directions: List[Tuple[int, int]],
 ) -> Union[None, List[str]]:
     """
     Helper method to collect all available moves for bishop, rook and queen
@@ -129,7 +129,7 @@ def list_available_moves_multiple_squares(
 def check_if_valid_multiple_squares(
     curr_field: str,
     dest_field: str,
-    directions: List[Tuple],
+    directions: List[Tuple[int, int]],
 ) -> bool:
     """
     Helper method to check if the desired move is valid for bishop, queen and rook
@@ -143,7 +143,7 @@ def check_if_valid_multiple_squares(
         field=curr_field,
         directions=directions,
     )
-    if dest_field in available_moves:
+    if available_moves and dest_field in available_moves:
         return True
     return False
 
@@ -162,7 +162,7 @@ def check_if_figure_in_board(row: int, col: int) -> bool:
         return False
 
 
-def string_field_to_indexes(field: str) -> (int, int):
+def string_field_to_indexes(field: str) -> Tuple[int, int]:
     """
     Helper method to change the string representation of position to indices
 

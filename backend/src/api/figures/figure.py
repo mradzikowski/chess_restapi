@@ -69,6 +69,7 @@ class King(Figure):
         return check_if_valid_single_point_move(
             curr_field=self.field,
             dest_field=dest_field,
+            directions=self.directions,
         )
 
 
@@ -100,6 +101,7 @@ class Rook(Figure):
         return check_if_valid_multiple_squares(
             curr_field=self.field,
             dest_field=dest_field,
+            directions=self.directions,
         )
 
 
@@ -131,6 +133,7 @@ class Bishop(Figure):
         return check_if_valid_multiple_squares(
             curr_field=self.field,
             dest_field=dest_field,
+            directions=self.directions,
         )
 
 
@@ -171,6 +174,7 @@ class Queen(Figure):
         return check_if_valid_multiple_squares(
             curr_field=self.field,
             dest_field=dest_field,
+            directions=self.directions,
         )
 
 
@@ -211,6 +215,7 @@ class Knight(Figure):
         return check_if_valid_single_point_move(
             curr_field=self.field,
             dest_field=dest_field,
+            directions=self.directions,
         )
 
 

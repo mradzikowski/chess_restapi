@@ -26,7 +26,9 @@ available_moves_fields = moves_namespace.model(
 
 
 class ValidChessMove(Resource):
+    @moves_namespace.marshal_with(move_validity_fields)
     def get(self, chess_figure: str, curr_field: str, dest_field: str):
+        """Checks if the dest move is valid for current field and chess figure"""
         response_object = {
             "figure": chess_figure,
             "currentField": curr_field,
@@ -52,13 +54,16 @@ class ValidChessMove(Resource):
 
         if not figure.validate_move(dest_field=dest_field):
             response_object["error"] = "Current move is not permitted."
+            return response_object, 200
 
         response_object["move"] = "valid"
         return response_object, 200
 
 
 class ValidChessMovesList(Resource):
+    @moves_namespace.marshal_with(available_moves_fields)
     def get(self, chess_figure: str, curr_field: str):
+        """Retrieves available moves for current field and chess figure"""
         response_object = {
             "figure": chess_figure,
             "currentField": curr_field,

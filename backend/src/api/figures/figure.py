@@ -17,7 +17,9 @@ class Figure(ABC):
 
     @abstractmethod
     def __init__(self, field: str):
-        pass
+        if not check_if_valid_field(field=field):
+            raise ValueError("Field does not exist.")
+        self.field = field
 
     @abstractmethod
     def list_available_moves(self):
@@ -34,9 +36,7 @@ class King(Figure):
     """Class of King's figure that implements figure's methods"""
 
     def __init__(self, field: str):
-        if not check_if_valid_field(field):
-            raise ValueError("Field does not exist.")
-        self.field = field
+        super(King, self).__init__(field=field)
         self.directions = [
             (0, 1),
             (1, 1),
@@ -76,9 +76,7 @@ class Rook(Figure):
     """Class of Rook's figure that implements figure's methods"""
 
     def __init__(self, field: str):
-        if not check_if_valid_field(field):
-            raise ValueError("Field does not exist.")
-        self.field = field
+        super(Rook, self).__init__(field=field)
         self.directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
     def list_available_moves(self) -> Union[None, List[str]]:
@@ -109,9 +107,7 @@ class Bishop(Figure):
     """Class of Bishop's figure that implements figure's methods"""
 
     def __init__(self, field: str):
-        if not check_if_valid_field(field):
-            raise ValueError("Field does not exist.")
-        self.field = field
+        super(Bishop, self).__init__(field=field)
         self.directions = [(1, 1), (1, -1), (-1, -1), (-1, 1)]
 
     def list_available_moves(self) -> Union[None, List[str]]:
@@ -142,9 +138,7 @@ class Queen(Figure):
     """Class of Queen's figure that implements figure's methods"""
 
     def __init__(self, field: str):
-        if not check_if_valid_field(field):
-            raise ValueError("Field does not exist.")
-        self.field = field
+        super(Queen, self).__init__(field=field)
         self.directions = [
             (0, 1),
             (1, 1),
@@ -184,9 +178,7 @@ class Knight(Figure):
     """Class of Knight's figure that implements figure's methods"""
 
     def __init__(self, field: str):
-        if not check_if_valid_field(field):
-            raise ValueError("Field does not exist.")
-        self.field = field
+        super(Knight, self).__init__(field=field)
         self.directions = [
             (1, 2),
             (2, -1),
@@ -226,9 +218,7 @@ class Pawn(Figure):
     """Class of Pawn's figure that implements figure's methods"""
 
     def __init__(self, field: str):
-        if not check_if_valid_field(field):
-            raise ValueError("Field does not exist.")
-        self.field = field
+        super(Pawn, self).__init__(field=field)
         self.directions = [(-1, 0)]
 
     def list_available_moves(self) -> Union[None, List[str]]:

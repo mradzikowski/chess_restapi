@@ -11,14 +11,18 @@ def list_available_moves_pawn(field: str, directions: List[Tuple]) -> None | Lis
     :return: list of available moves for the current position
     """
     available_moves = []
-    curr_x, curr_y = string_field_to_indexes(field=field)
+    curr_row, curr_col = string_field_to_indexes(field=field)
     for direction in directions:
-        pos_x = curr_x + direction[0]
-        pos_y = curr_y + direction[1]
-        if check_if_figure_in_board(x=pos_x, y=pos_y):
-            available_moves.append(indexes_to_field(x_index=pos_x, y_index=pos_y))
-    if curr_y == 6:
-        available_moves.append(indexes_to_field(x_index=curr_x, y_index=curr_y + 2))
+        pos_row = curr_row + direction[0]
+        pos_col = curr_col + direction[1]
+        if check_if_figure_in_board(row=pos_row, col=pos_col):
+            available_moves.append(
+                indexes_to_field(row_index=pos_row, col_index=pos_col),
+            )
+    if curr_row == 6:
+        available_moves.append(
+            indexes_to_field(row_index=curr_row - 2, col_index=curr_col),
+        )
     return available_moves
 
 
@@ -53,12 +57,14 @@ def list_available_moves_single_square(
     :return: list of available moves for the current position
     """
     available_moves = []
-    curr_x, curr_y = string_field_to_indexes(field=field)
+    curr_row, curr_col = string_field_to_indexes(field=field)
     for direction in directions:
-        pos_x = curr_x + direction[0]
-        pos_y = curr_y + direction[1]
-        if check_if_figure_in_board(x=pos_x, y=pos_y):
-            available_moves.append(indexes_to_field(x_index=pos_x, y_index=pos_y))
+        pos_row = curr_row + direction[0]
+        pos_col = curr_col + direction[1]
+        if check_if_figure_in_board(row=pos_row, col=pos_col):
+            available_moves.append(
+                indexes_to_field(row_index=pos_row, col_index=pos_col),
+            )
     return available_moves
 
 
@@ -96,14 +102,16 @@ def list_available_moves_multiple_squares(
     :return: list of available moves for the current position
     """
     available_moves = []
-    curr_x, curr_y = string_field_to_indexes(field=field)
+    curr_row, curr_col = string_field_to_indexes(field=field)
     for direction in directions:
-        temp_x, temp_y = curr_x, curr_y
+        temp_row, temp_col = curr_row, curr_col
         while True:
-            temp_x += direction[0]
-            temp_y += direction[1]
-            if check_if_figure_in_board(x=temp_x, y=temp_y):
-                available_moves.append(indexes_to_field(x_index=temp_x, y_index=temp_y))
+            temp_row += direction[0]
+            temp_col += direction[1]
+            if check_if_figure_in_board(row=temp_row, col=temp_col):
+                available_moves.append(
+                    indexes_to_field(row_index=temp_row, col_index=temp_col),
+                )
             else:
                 break
     return available_moves
@@ -131,15 +139,15 @@ def check_if_valid_multiple_squares(
     return False
 
 
-def check_if_figure_in_board(x: int, y: int) -> bool:
+def check_if_figure_in_board(row: int, col: int) -> bool:
     """
     Helper method to check if the current position of figure is in board
 
-    :param x: index of row
-    :param y: index of column
+    :param row: index of row
+    :param col: index of column
     :return: True if valid, False if not valid
     """
-    if 0 <= x < 8 and 0 <= y < 8:
+    if 0 <= row < 8 and 0 <= col < 8:
         return True
     else:
         return False
@@ -167,12 +175,12 @@ def string_field_to_indexes(field: str) -> (int, int):
     return 8 - number, letters_to_numbers[letter]
 
 
-def indexes_to_field(x_index: int, y_index: int) -> str:
+def indexes_to_field(row_index: int, col_index: int) -> str:
     """
     Helper method to represent x and y indices of current field in string
 
-    :param x_index: index of row
-    :param y_index: index of column
+    :param row_index: index of row
+    :param col_index: index of column
     :return: string representation of current field
     """
     numbers_to_letters = {
@@ -185,7 +193,7 @@ def indexes_to_field(x_index: int, y_index: int) -> str:
         6: "g",
         7: "h",
     }
-    return numbers_to_letters[y_index] + str(8 - x_index)
+    return numbers_to_letters[col_index] + str(8 - row_index)
 
 
 def check_if_valid_field(field: str) -> bool:

@@ -191,6 +191,7 @@ class Knight(Figure):
             (1, 2),
             (2, -1),
             (1, -2),
+            (2, 1),
             (-1, -2),
             (-2, -1),
             (-2, 1),
@@ -228,7 +229,7 @@ class Pawn(Figure):
         if not check_if_valid_field(field):
             raise ValueError("Field does not exist.")
         self.field = field
-        self.directions = [(0, 1)]
+        self.directions = [(-1, 0)]
 
     def list_available_moves(self) -> None | List[str]:
         """
